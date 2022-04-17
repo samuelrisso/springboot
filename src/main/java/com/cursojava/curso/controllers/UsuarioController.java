@@ -5,6 +5,7 @@ import com.cursojava.curso.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class UsuarioController {
     private UsuarioDao usuarioDao;
 
     //esta anotacion indica la direccion de url que va a ejecutar este metodo
-    @RequestMapping(value = "usuario/{id}")
+    @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.GET)
     public Usuario getUsuario(@PathVariable Long id) {
         Usuario usuario = new Usuario();
         usuario.setId(id);
@@ -30,8 +31,8 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "usuarios")
-    public List<Usuario> getUsuarios(Long id) {
+    @RequestMapping(value = "api/usuarios")
+    public List<Usuario> getUsuarios() {
         return usuarioDao.getUsuarios();
     }
 
@@ -46,15 +47,9 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "usuario1234")
-    public Usuario eliminar() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Samuel");
-        usuario.setApellido("Risso");
-        usuario.setEmail("asdasd@gmail.com");
-        usuario.setTelefono("123213");
-
-        return usuario;
+    @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
+    public void eliminar(@PathVariable Long id) {
+        usuarioDao.eliminar(id);
     }
 
     @RequestMapping(value = "usuario12345")

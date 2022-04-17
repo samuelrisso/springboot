@@ -10,9 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//con esto le indicamos que es una entidad que va a la BD
+//Entity con esto le indicamos que es una entidad que va a la BD
+//Table con esta anotacion le indicamos a que tabla tiene que ir en la BD
 @Entity
-//con esta anotacion le indicamos a que tabla tiene que ir en la BD
 @Table(name = "usuarios")
 @ToString @EqualsAndHashCode
 public class Usuario {

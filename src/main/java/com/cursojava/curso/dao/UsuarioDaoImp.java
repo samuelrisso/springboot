@@ -9,9 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-//Esta anotacion hace referencia que va a tener la funcionalidad de poder acceder al repositorio de la BD
+//Repository Esta anotacion hace referencia que va a tener la funcionalidad de poder acceder al repositorio de la BD
+//Transactional Esta anotacion hace referencia a la forma que va a tratar las consultas SQL como las va a armar y ejecutar (en fragmento de transaccion)
 @Repository
-//Esta anotacion hace referencia a la forma que va a tratar las consultas SQL como las va a armar y ejecutar (en fragmento de transaccion)
 @Transactional
 public class UsuarioDaoImp implements UsuarioDao {
 
@@ -28,5 +28,11 @@ public class UsuarioDaoImp implements UsuarioDao {
         return entityManager.createQuery(query).getResultList();
 
 
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        Usuario usuario = entityManager.find(Usuario.class,id);
+        entityManager.remove(usuario);
     }
 }
