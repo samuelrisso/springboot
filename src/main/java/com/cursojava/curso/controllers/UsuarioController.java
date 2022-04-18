@@ -3,12 +3,8 @@ package com.cursojava.curso.controllers;
 import com.cursojava.curso.dao.UsuarioDao;
 import com.cursojava.curso.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,35 +27,22 @@ public class UsuarioController {
         return usuario;
     }
 
-    @RequestMapping(value = "api/usuarios")
+    @RequestMapping(value = "api/usuarios", method = RequestMethod.GET)
     public List<Usuario> getUsuarios() {
         return usuarioDao.getUsuarios();
     }
 
-    @RequestMapping(value = "usuario123")
-    public Usuario editar() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Samuel");
-        usuario.setApellido("Risso");
-        usuario.setEmail("asdsa@gmail.com");
-        usuario.setTelefono("123123");
-
-        return usuario;
+    //con la anotacion RequestBody convierte el JSON que recibe a un objeto directamente
+    @RequestMapping(value = "api/usuarios", method = RequestMethod.POST)
+    public void registrarUsuario(@RequestBody Usuario usuario) {
+        usuarioDao.registrar(usuario);
     }
+
 
     @RequestMapping(value = "api/usuarios/{id}", method = RequestMethod.DELETE)
     public void eliminar(@PathVariable Long id) {
         usuarioDao.eliminar(id);
     }
 
-    @RequestMapping(value = "usuario12345")
-    public Usuario buscar() {
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Samuel");
-        usuario.setApellido("Risso");
-        usuario.setEmail("asdasd@gmail.com");
-        usuario.setTelefono("123213");
 
-        return usuario;
-    }
 }

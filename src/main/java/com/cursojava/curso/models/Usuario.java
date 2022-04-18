@@ -1,14 +1,12 @@
 package com.cursojava.curso.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 //Entity con esto le indicamos que es una entidad que va a la BD
 //Table con esta anotacion le indicamos a que tabla tiene que ir en la BD
@@ -22,6 +20,7 @@ public class Usuario {
     //Debemos indicarle a que columna corresponde con la anotacion @Column y si es primary key con el @Id
     @Id
     @Getter @Setter @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     @Getter @Setter @Column(name = "nombre")
     private String nombre;
